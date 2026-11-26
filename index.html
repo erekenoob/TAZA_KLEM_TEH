@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAZA KILEM SHIELI — Калькулятор менеджера</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/manager.css">
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header class="header">
+    <div class="container header__inner">
+      <div class="brand">
+        <img src="img/tazaklem.jpg" alt="TAZA KILEM логотип" class="brand__logo">
+        <div class="brand__text">
+          <span class="brand__title">TAZA KILEM SHIELI</span>
+          <span class="brand__subtitle" data-i18n="header_sub">Калькулятор заказа и отправка клиенту</span>
+        </div>
+      </div>
+
+      <!-- Переключатель языка (jQuery) -->
+      <div class="lang-switcher" role="group" aria-label="Language switch">
+        <button type="button" class="lang-btn" data-lang="kz">KZ</button>
+        <button type="button" class="lang-btn active" data-lang="ru">RU</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="calc-card">
+
+        <!-- Блок 1: Номер клиента и адрес -->
+        <div class="section-block">
+          <h2 class="block-title" data-i18n="sec_client_title">1. Данные клиента (кому отправить расчет)</h2>
+          <div class="grid grid--2">
+            <div class="field-group">
+              <label for="customerPhone" data-i18n="lbl_phone">Номер WhatsApp клиента *</label>
+              <input
+                type="tel"
+                id="customerPhone"
+                data-i18n-placeholder="ph_phone"
+                placeholder="+7 (777) 123-45-67"
+              >
+            </div>
+            <div class="field-group">
+              <label for="customerAddress" data-i18n="lbl_address">Адрес клиента</label>
+              <input
+                type="text"
+                id="customerAddress"
+                data-i18n-placeholder="ph_address"
+                placeholder="п. Шиели, ул. Абая, 15"
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Блок 2: Расчет ковров -->
+        <div class="section-block">
+          <div class="block-head">
+            <h2 class="block-title" data-i18n="sec_carpets_title">2. Размеры ковров (450 ₸ / м²)</h2>
+            <span class="hint-badge" data-i18n="sec_carpets_hint">Новая строка добавляется автоматически</span>
+          </div>
+
+          <div id="carpetList" class="carpet-list"></div>
+
+          <!-- Итоговая плашка -->
+          <div class="totals-bar">
+            <div class="total-item">
+              <span class="total-item__label" data-i18n="tot_count">Ковров:</span>
+              <strong class="total-item__val" id="totalCarpets">0</strong>
+            </div>
+            <div class="total-item">
+              <span class="total-item__label" data-i18n="tot_area">Общая площадь:</span>
+              <strong class="total-item__val"><span id="totalArea">0.00</span> м²</strong>
+            </div>
+            <div class="total-item total-item--accent">
+              <span class="total-item__label" data-i18n="tot_sum">Итого к оплате:</span>
+              <strong class="total-item__val"><span id="totalPrice">0</span> ₸</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Блок 3: Время развозки (забор и доставка) -->
+        <div class="section-block">
+          <h2 class="block-title" data-i18n="sec_delivery_title">3. График развозки (забор и доставка)</h2>
+          <div class="grid grid--2">
+            <div class="field-group">
+              <label for="pickupTime" data-i18n="lbl_pickup">Когда заберут с адреса (забор):</label>
+              <input
+                type="text"
+                id="pickupTime"
+                data-i18n-placeholder="ph_pickup"
+                placeholder="Сегодня, 15:00 – 17:00"
+              >
+            </div>
+            <div class="field-group">
+              <label for="deliveryTime" data-i18n="lbl_delivery">Когда доставят обратно (доставка):</label>
+              <input
+                type="text"
+                id="deliveryTime"
+                data-i18n-placeholder="ph_delivery"
+                placeholder="Через 2 дня, после 16:00"
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Блок 4: Комментарий -->
+        <div class="section-block">
+          <h2 class="block-title" data-i18n="sec_comment_title">4. Комментарий к заказу</h2>
+          <div class="field-group">
+            <textarea
+              id="orderComment"
+              rows="3"
+              data-i18n-placeholder="ph_comment"
+              placeholder="Дополнительная информация: способ оплаты, ориентир, выведение сложных пятен..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="actions-bar">
+          <button type="button" id="resetBtn" class="btn btn--ghost" data-i18n="btn_reset">Очистить форму</button>
+          <button type="button" id="sendToClientBtn" class="btn btn--whatsapp" data-i18n="btn_send">
+            Отправить сообщение клиенту в WhatsApp
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Подключение jQuery и отдельного класса -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/manager-app.js"></script>
+</body>
+</html>
